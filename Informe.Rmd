@@ -229,3 +229,30 @@ resumen
 ```
 
 ##### Cantidad de palabras
+
+```{r}
+library(tidyverse)
+library(stringr)
+
+# Leer los datos
+db <- read.csv("train.csv")
+
+# Calcular la cantidad de palabras para cada discurso
+db <- db %>%
+  mutate(CantidadPalabras = str_count(discourse_text, '\\w+'))
+
+# Agrupar y resumir los datos por efectividad del discurso
+resumen <- db %>%
+  group_by(discourse_effectiveness) %>%
+  summarize(Promedio = mean(CantidadPalabras, na.rm = TRUE)) %>%
+  filter(discourse_effectiveness %in% c("Ineffective", "Effective", "Adequate")) %>%
+  rename(Categoria = discourse_effectiveness)
+
+# Crear el gráfico
+ggplot(data=resumen, aes(x=reorder(Categoria, Promedio), y=Promedio, fill=Categoria)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_text(aes(label=Promedio), vjust=1.6, color="black",
+            position = position_dodge(0.9), size=3.5) +
+  labs(title="Promedio de palabras por categoría", x='Categoría', y="Promedio") +
+  theme(legend.position="none")
+```
