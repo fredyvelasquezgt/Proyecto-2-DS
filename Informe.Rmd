@@ -203,6 +203,27 @@ summary(Adecuado)
 
 
 ```{r}
+library(dplyr)
 
+# Función auxiliar para calcular medias
+obtener_media <- function(categoria, columna) {
+  mean(categoria[[columna]])
+}
+
+resumen <- data.frame(
+  Categoria = c("Ineficiente", "Adecuado", "Eficiente"),
+  Enojo = c(obtener_media(ineficiente, "Enojo"), obtener_media(Adecuado, "Enojo"), obtener_media(Efectivo, "Enojo")),
+  Anticipacion = c(obtener_media(ineficiente, "Anticipacion"), obtener_media(Adecuado, "Anticipacion"), obtener_media(Efectivo, "Anticipacion")),
+  Disgusto = c(obtener_media(ineficiente, "Disgusto"), obtener_media(Adecuado, "Disgusto"), obtener_media(Efectivo, "Disgusto")),
+  Miedo = c(obtener_media(ineficiente, "Miedo"), obtener_media(Adecuado, "Miedo"), obtener_media(Efectivo, "Miedo")),
+  Felicidad = c(obtener_media(ineficiente, "Felicidad"), obtener_media(Adecuado, "Felicidad"), obtener_media(Efectivo, "Felicidad")),
+  Tristeza = c(obtener_media(ineficiente, "Tristeza"), obtener_media(Adecuado, "Tristeza"), obtener_media(Efectivo, "Tristeza")),
+  Sorpresa = c(obtener_media(ineficiente, "Sorpresa"), obtener_media(Adecuado, "Sorpresa"), obtener_media(Efectivo, "Sorpresa")),
+  Verdad = c(obtener_media(ineficiente, "Verdad"), obtener_media(Adecuado, "Verdad"), obtener_media(Efectivo, "Verdad")),
+  Negativo = c(obtener_media(ineficiente, "Negativo"), obtener_media(Adecuado, "Negativo"), obtener_media(Efectivo, "Negativo")),
+  Positivo = c(obtener_media(ineficiente, "Positivo"), obtener_media(Adecuado, "Positivo"), obtener_media(Efectivo, "Positivo"))
+)
+
+resumen
 
 ```
