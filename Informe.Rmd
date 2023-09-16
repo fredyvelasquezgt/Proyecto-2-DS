@@ -187,3 +187,9 @@ db$Positivo<- d$positive
 
 ```
 
+```{r}
+
+
+```
+
+
