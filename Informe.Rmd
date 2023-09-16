@@ -256,3 +256,6 @@ ggplot(data=resumen, aes(x=reorder(Categoria, Promedio), y=Promedio, fill=Catego
   labs(title="Promedio de palabras por categoría", x='Categoría', y="Promedio") +
   theme(legend.position="none")
 ```
+
+### Hallazgos y conclusiones
+
