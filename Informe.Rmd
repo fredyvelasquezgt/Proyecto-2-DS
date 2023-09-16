@@ -147,7 +147,41 @@ wordcloud(words = dtm_d$word, freq = dtm_d$freq, min.freq = 5,
 
 ```{r warning=FALSE}
 
+syuzhet_vector <- get_sentiment(db$discourse_text, method="syuzhet")
+# see the first row of the vector
+head(syuzhet_vector)
+# see summary statistics of the vector
+summary(syuzhet_vector)
 
+# bing
+bing_vector <- get_sentiment(db$discourse_text, method="bing")
+head(bing_vector)
+summary(bing_vector)
+#affin
+afinn_vector <- get_sentiment(db$discourse_text, method="afinn")
+head(afinn_vector)
+summary(afinn_vector)
+
+#compare the first row of each vector using sign function
+rbind(
+  sign(head(syuzhet_vector)),
+  sign(head(bing_vector)),
+  sign(head(afinn_vector))
+)
+
+d<-get_nrc_sentiment(db$discourse_text)
+# head(d,10) - to see top 10 lines of the get_nrc_sentiment dataframe
+head (d,10)
+db$Enojo<- d$anger
+db$Anticipacion<- d$anticipation
+db$Disgusto<- d$disgust
+db$Miedo<- d$fear
+db$Felicidad<- d$joy
+db$Tristeza<- d$sadness
+db$Sorpresa<- d$surprise
+db$Verdad<- d$trust
+db$Negativo<- d$negative
+db$Positivo<- d$positive
 
 
 
