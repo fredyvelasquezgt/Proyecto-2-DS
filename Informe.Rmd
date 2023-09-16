@@ -145,3 +145,11 @@ wordcloud(words = dtm_d$word, freq = dtm_d$freq, min.freq = 5,
 
 ##### Analisis de sentimiento en los discursos
 
+```{r warning=FALSE}
+
+
+
+
+
+```
+
