@@ -183,7 +183,29 @@ db$Verdad<- d$trust
 db$Negativo<- d$negative
 db$Positivo<- d$positive
 
+# transponer
+td<-data.frame(t(d))
 
+# La función rowSums calcula la suma de columnas a través de las filas para cada nivel de una variable de agrupacion
+td_new <- data.frame(rowSums(td[2:253]))
+
+# Transformación y limpieza
+names(td_new)[1] <- "count"
+td_new <- cbind("sentiment" = rownames(td_new), td_new)
+rownames(td_new) <- NULL
+td_new2<-td_new[1:8,]
+
+# Gráfica Uno - cuenta de palabras asociadas con cada sentimiento
+quickplot(sentiment, data=td_new2, weight=count, geom="bar", fill=sentiment, ylab="count")+ggtitle("Sentimientos de la encuesta")
+
+# Gráfica Dos - cuenta de palabras asociadas con cada sentimiento, expresado como porcentaje
+barplot(
+  sort(colSums(prop.table(d[, 1:8]))), 
+  horiz = TRUE, 
+  cex.names = 0.7, 
+  las = 1, 
+  main = "Emociones en el Texto", xlab="Porcentaje"
+)
 
 ```
 
