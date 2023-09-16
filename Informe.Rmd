@@ -227,3 +227,5 @@ resumen <- data.frame(
 resumen
 
 ```
+
+##### Cantidad de palabras
