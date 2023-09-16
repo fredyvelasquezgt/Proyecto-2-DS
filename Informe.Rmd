@@ -188,7 +188,16 @@ db$Positivo<- d$positive
 ```
 
 ```{r}
+library(dplyr)
 
+ineficiente <- db %>% filter(discourse_effectiveness == "Ineffective")
+summary(ineficiente)
+
+Efectivo <- db %>% filter(discourse_effectiveness == "Effective")
+summary(Efectivo)
+
+Adecuado <- db %>% filter(discourse_effectiveness == "Adequate")
+summary(Adecuado)
 
 ```
 
