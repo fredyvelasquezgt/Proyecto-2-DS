@@ -44,3 +44,27 @@ bindCandidateToTDM<-function(tdm){
   return(s.df)
   
 }
+
+
+candTDM<-lapply(tdm, bindCandidateToTDM)
+tdm.stack<-do.call(rbind.fill,candTDM)
+tdm.stack[is.na(tdm.stack)]<-0
+
+
+
+train.idx<-sample(nrow(tdm.stack),ceiling(nrow(tdm.stack)*0.7))
+test.idx<-(1:nrow(tdm.stack))[-train.idx]
+
+train.idx<-head(train.idx,5)
+test.idx<-head(test.idx,5)
+#Model KNN
+
+tdm.cand<- tdm.stack[,'target']
+tdm.stack.nl <-tdm.stack[,!colnames(tdm.stack) %in% 'target']
+
+knn.pred<- knn(tdm.stack.nl[train.idx,],tdm.stack.nl[test.idx,],tdm.cand[train.idx])
+
+
+#Acurracy
+
+conf.mat<- table('predictions'=knn.pred, Actual=tdm.cand[test.idx])
